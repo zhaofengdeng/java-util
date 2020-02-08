@@ -32,17 +32,21 @@ public class BookDownLoadXiaShuWang {
 				e.printStackTrace();
 			}
 			String html = HttpPostUtil.post("https://www.xiashu.cc/" + menu + "/read_" + i + ".html", null);
-			String title = getTitle(html);
-			String content = getContent(html);
-			out.write(title);
-			out.write(BR_VALUE);
-			out.write(BR_VALUE);
-			out.write(content);
-			out.write(BR_VALUE);
-			out.write(BR_VALUE);
-			out.write(BR_VALUE);
-			end = isEnd(content);
-			i++;
+			end = isEnd(html);
+			if(!end) {
+				String title = getTitle(html);
+				String content = getContent(html);
+				out.write(title);
+				out.write(BR_VALUE);
+				out.write(BR_VALUE);
+				out.write(content);
+				out.write(BR_VALUE);
+				out.write(BR_VALUE);
+				out.write(BR_VALUE);
+				
+				i++;
+			}
+			
 		}
 		out.flush(); // 把缓存区内容压入文件
 		out.close(); // 最后记得关闭文件
